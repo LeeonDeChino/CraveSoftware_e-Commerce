@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carrito de Compras - Crave Software Merch</title>
+  <link rel="stylesheet" href="/CraveSoftware_e-Commerce/css/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Tu Carrito</h1>
+    <nav>
+      <a href="/CraveSoftware_e-Commerce/products.html">← Volver a productos</a>
+      <button onclick="logout()">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <section id="cart-container">
+    <!-- Aquí se listarán los productos del carrito -->
+  </section>
+
+  <section id="confirm-section">
+    <button onclick="confirmarPedido()">Confirmar pedido</button>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="/CraveSoftware_e-Commerce/js/supabase.js"></script>
+  <script src="/CraveSoftware_e-Commerce/js/cart.js"></script>
+</body>
+</html>
