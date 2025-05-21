@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Productos – CraveSoftware Merch</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="/CraveSoftware_e-Commerce/css/styles.css" />
 </head>
 <body>
   <header>
     <h1>Productos</h1>
     <nav>
-      <a href="index.html">Inicio</a>
-      <a href="cart.html">Carrito</a>
-      <a href="products.html">Productos</a>
+      <a href="/CraveSoftware_e-Commerce/index.html">Inicio</a>
+      <a href="/CraveSoftware_e-Commerce/cart.html">Carrito</a>
+      <a href="/CraveSoftware_e-Commerce/products.html">Productos</a>
     </nav>
   </header>
   <main>
@@ -21,8 +21,8 @@
     <p id="mensaje-vacio">No hay productos disponibles.</p>
   </main>
 
-  <script src="js/supabase.js"></script>
-  <script src="js/products.js"></script>
+  <script src="/CraveSoftware_e-Commerce/js/supabase.js"></script>
+  <script src="/CraveSoftware_e-Commerce/js/products.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', async () => {
     const { data, error } = await supabase.from('producto').select('*');
