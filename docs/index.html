@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Login - Crave Software Merch</title>
-  <link rel="stylesheet" href="/CraveSoftware_e-Commerce/css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CraveSoftware Merch Store</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <h1>Bienvenido a Crave Software Merch</h1>
-  <div id="auth-container">
-    <h2>Iniciar sesión</h2>
-    <input type="email" id="login-email" placeholder="Correo">
-    <input type="password" id="login-password" placeholder="Contraseña">
-    <button onclick="login()">Iniciar Sesión</button>
+  <header>
+    <h1>Bienvenido a CraveSoftware Merch Store</h1>
+    <p>Tu lugar para obtener el mejor merch de tecnología y videojuegos.</p>
+    <a href="products.html">Explorar productos</a>
+  </header>
+ <main class="auth">
+    <h1>Login</h1>
 
-    <h2>Registrarse</h2>
-    <input type="email" id="register-email" placeholder="Correo">
-    <input type="password" id="register-password" placeholder="Contraseña">
-    <button onclick="register()">Registrarse</button>
-  </div>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Correo electrónico" required />
+      <input type="password" id="password" placeholder="Contraseña" required />
+      <button type="submit">Iniciar Sesión</button>
+      <p><a href="#" id="registro-link">¿No tienes cuenta? Regístrate</a></p>
+      <p><a href="#" id="recuperar-link">¿Olvidaste tu contraseña?</a></p>
+    </form>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script src="/CraveSoftware_e-Commerce/js/supabase.js"></script>
-  <script src="/CraveSoftware_e-Commerce/js/auth.js"></script>
+    <form id="registro-form" style="display: none;">
+      <input type="email" id="registro-email" placeholder="Correo electrónico" required />
+      <input type="password" id="registro-password" placeholder="Contraseña" required />
+      <button type="submit">Registrarse</button>
+      <p><a href="#" id="login-link">¿Ya tienes cuenta? Inicia sesión</a></p>
+    </form>
+
+    <form id="recuperar-form" style="display: none;">
+      <input type="email" id="recuperar-email" placeholder="Correo para recuperar contraseña" required />
+      <button type="submit">Enviar enlace</button>
+      <p><a href="#" id="volver-login">Volver al inicio de sesión</a></p>
+    </form>
+
+    <p id="auth-msg"></p>
+  </main>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script defer src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>

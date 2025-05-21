@@ -1,52 +1,45 @@
-async function loadProducts() {
-  const { data: products, error } = await supabase
-    .from('Producto')
-    .select('*')
-    .order('Nombre', { ascending: true }); // Ordenar por nombre de producto
+document.addEventListener('DOMContentLoaded', async () => {
+  const contenedor = document.getElementById('productos-container');
+  const mensaje = document.getElementById('mensaje-vacio');
+  const buscador = document.getElementById('buscador');
 
-  if (error) {
-    console.error(error);
-    alert('Error al cargar los productos.');
-    return;
+  let productos = [];
+
+  try {
+    const { data, error } = await supabase.from('producto').select('*');
+    if (error) throw error;
+
+    productos = data;
+    mostrarProductos(productos);
+  } catch (err) {
+    console.error('❌ Error al cargar productos:', err.message);
   }
 
-  const productsContainer = document.getElementById('products-container');
-  productsContainer.innerHTML = ''; // Limpiar contenido previo
+  function mostrarProductos(lista) {
+    contenedor.innerHTML = '';
+    if (lista.length === 0) {
+      mensaje.style.display = 'block';
+      return;
+    }
+    mensaje.style.display = 'none';
 
-  products.forEach(product => {
-    const productDiv = document.createElement('div');
-    productDiv.className = 'product';
-    productDiv.innerHTML = `
-      <h3>${product.Nombre}</h3>
-      <p>${product.Descripción}</p>
-      <p>Precio: $${product.Precio}</p>
-      <p>Stock: ${product.Stock}</p>
-      <button onclick="addToCart(${product.ID_Producto})">Agregar al carrito</button>
-    `;
-    productsContainer.appendChild(productDiv);
+    lista.forEach(prod => {
+      const div = document.createElement('div');
+      div.className = 'producto';
+      div.innerHTML = `
+        <h3>${prod.nombre}</h3>
+        <p>${prod.descripcion}</p>
+        <p><strong>$${prod.precio}</strong></p>
+      `;
+      contenedor.appendChild(div);
+    });
+  }
+
+  buscador.addEventListener('input', e => {
+    const texto = e.target.value.toLowerCase();
+    const filtrados = productos.filter(p =>
+      p.nombre.toLowerCase().includes(texto) || p.descripcion.toLowerCase().includes(texto)
+    );
+    mostrarProductos(filtrados);
   });
-}
-
-// Llamar a la función para cargar productos cuando la página se haya cargado
-document.addEventListener('DOMContentLoaded', loadProducts);
-
-// Función para agregar productos al carrito (por ahora, solo en localStorage)
-function addToCart(productId) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-  const existingProduct = cart.find(item => item.ID_Producto === productId);
-  if (existingProduct) {
-    existingProduct.Cantidad += 1;
-  } else {
-    cart.push({ ID_Producto: productId, Cantidad: 1 });
-  }
-
-  localStorage.setItem('cart', JSON.stringify(cart));
-  alert('Producto agregado al carrito');
-}
-
-// Función de logout
-async function logout() {
-  await supabase.auth.signOut();
-  window.location.href = "index.html"; // Redirigir al login
-}
+});
