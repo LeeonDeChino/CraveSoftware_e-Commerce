@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Carrito de Compras - Crave Software Merch</title>
   <link rel="stylesheet" href="/CraveSoftware_e-Commerce/css/styles.css" />
+  <link rel="icon" href="/CraveSoftware_e-Commerce/assets/LogoCrave.ico">
 </head>
 <body>
   <header>
@@ -15,11 +16,21 @@
   </header>
 
   <section id="cart-container">
-    <!-- Aquí se listarán los productos del carrito -->
-  </section>
-
-  <section id="confirm-section">
-    <button onclick="confirmarPedido()">Confirmar pedido</button>
+     <table>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="cart-items"></tbody>
+  </table>
+  <p id="total">Total: $0.00</p>
+  <button id="vaciar-carrito">Vaciar carrito</button>
+  <a href="/CraveSoftware_e-Commerce/checkout.html" class="btn">Proceder al pago</a>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>

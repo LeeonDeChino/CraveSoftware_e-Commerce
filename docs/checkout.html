@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Finalizar Compra - Crave Software Merch</title>
+  <link rel="stylesheet" href="/CraveSoftware_e-Commerce/css/styles.css" />
+  <link rel="icon" href="/CraveSoftware_e-Commerce/assets/LogoCrave.ico">
+</head>
+<body>
+  <header>
+    <h1>Finalizar Compra</h1>
+    <nav>
+      <a href="/CraveSoftware_e-Commerce/cart.html">← Volver al carrito</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="checkout-summary">
+      <h2>Resumen del pedido</h2>
+      <div id="resumen-carrito"></div>
+      <p id="checkout-total">Total: $0.00</p>
+    </section>
+
+    <section id="formulario-envio">
+      <h2>Datos de envío</h2>
+      <form id="checkout-form">
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="direccion">Dirección de envío:</label>
+        <textarea id="direccion" name="direccion" required></textarea>
+
+        <label for="metodoPago">Método de pago:</label>
+        <select id="metodoPago" name="metodoPago" required>
+          <option value="tarjeta">Tarjeta de crédito</option>
+          <option value="paypal">PayPal</option>
+        </select>
+
+        <button type="submit">Confirmar pedido</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="/CraveSoftware_e-Commerce/js/supabase.js"></script>
+  <script src="/CraveSoftware_e-Commerce/js/checkout.js"></script>
+</body>
+</html>
