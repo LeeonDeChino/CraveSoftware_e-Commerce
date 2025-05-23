@@ -6,4 +6,7 @@ TIENDA DE MERCH DE MI ESTUDIO __CRAVE SOFTWARE__
 
 -[Enlace a GitHub Pages](https://leeondechino.github.io/CraveSoftware_e-Commerce/index.html)
 
+- [Documento Tienda Online](./tienda-online.md)
+
+- [Documento Modelado de Tienda Online](./modelado-tienda.md)
 ----
