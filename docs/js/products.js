@@ -41,10 +41,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       const div = document.createElement('div');
       div.className = 'producto';
       div.innerHTML = `
-        <h3>${prod.Nombre}</h3>
-        <p>${prod.Descripción}</p>
-        <p><strong>$${prod.Precio}</strong></p>
-        <button class="add-to-cart" data-id="${prod.ID_Producto}" data-nombre="${prod.Nombre}" data-precio="${prod.Precio}">
+        <h3>${prod.nombre}</h3>
+        <p>${prod.descripción}</p>
+        <p><strong>$${prod.precio}</strong></p>
+        <button class="add-to-cart" data-id="${prod.id_producto}" data-nombre="${prod.nombre}" data-precio="${prod.precio}">
           Agregar al carrito
         </button>
       `;
