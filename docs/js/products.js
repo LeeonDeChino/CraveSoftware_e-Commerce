@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
-    window.location.href = 'index.html';
+    window.location.href = '/CraveSoftware_e-Commerce/index.html';
     return;
   }
 
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   logoutButton.addEventListener('click', async () => {
     await supabase.auth.signOut();
-    window.location.href = 'index.html';
+    window.location.href = '/CraveSoftware_e-Commerce/index.html';
   });
 
   let productos = [];
@@ -29,28 +29,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('❌ Error al cargar productos:', err.message);
   }
 
+  //Function mostrar productos
+
   function mostrarProductos(lista) {
-    contenedor.innerHTML = '';
-    if (lista.length === 0) {
-      mensaje.style.display = 'block';
-      return;
-    }
-    mensaje.style.display = 'none';
+  contenedor.innerHTML = '';
+  if (lista.length === 0) {
+    mensaje.style.display = 'block';
+    return;
+  }
+  mensaje.style.display = 'none';
 
-    lista.forEach(prod => {
-      const div = document.createElement('div');
-      div.className = 'producto';
-      div.innerHTML = `
-        <h3>${prod.nombre}</h3>
-        <p>${prod.descripción}</p>
-        <p><strong>$${prod.precio}</strong></p>
-        <button class="add-to-cart" data-id="${prod.id_producto}" data-nombre="${prod.nombre}" data-precio="${prod.precio}">
-          Agregar al carrito
-        </button>
-      `;
-      contenedor.appendChild(div);
-    });
+  // Diccionario que relaciona producto → imagen
+  const imagenes = {
+    'Camiseta': '/CraveSoftware_e-Commerce/assets/shirtLogo.png',
+    'Hoodie': '/CraveSoftware_e-Commerce/assets/hoodieLogo.png',
+    'Taza': '/CraveSoftware_e-Commerce/assets/cupLogo.png',
+    'Gorra': '/CraveSoftware_e-Commerce/assets/capLogo.png',
+    'Sticker Pack': '/CraveSoftware_e-Commerce/assets/stickerpackLogo.png'
+  };
 
+  lista.forEach(prod => {
+    const rutaImagen = imagenes[prod.nombre] || '/CraveSoftware_e-Commerce/assets/placeholder.png';
+
+    const div = document.createElement('div');
+    div.className = 'producto';
+    div.innerHTML = `
+      <img src="${rutaImagen}" alt="${prod.nombre}" class="producto-img" />
+      <h3>${prod.nombre}</h3>
+      <p>${prod.descripción}</p>
+      <p><strong>$${prod.precio}</strong></p>
+      <button class="add-to-cart" data-id="${prod.id_producto}" data-nombre="${prod.nombre}" data-precio="${prod.precio}">
+        Agregar al carrito
+      </button>
+    `;
+    contenedor.appendChild(div);
+  });
     // Activar botones luego de renderizar
     document.querySelectorAll('.add-to-cart').forEach(button => {
       button.addEventListener('click', () => {

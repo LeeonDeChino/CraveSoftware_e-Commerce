@@ -3,14 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const registroForm = document.getElementById('registro-form');
   const recuperarForm = document.getElementById('recuperar-form');
   const msg = document.getElementById('auth-msg');
+  const titulo = document.querySelector('main.auth h1');
 
   const show = (form) => {
-    loginForm.style.display = 'none';
-    registroForm.style.display = 'none';
-    recuperarForm.style.display = 'none';
-    form.style.display = 'block';
-    msg.textContent = '';
-  };
+  loginForm.style.display = 'none';
+  registroForm.style.display = 'none';
+  recuperarForm.style.display = 'none';
+  form.style.display = 'block';
+  msg.textContent = '';
+
+  if (form === loginForm) titulo.textContent = 'Login';
+  else if (form === registroForm) titulo.textContent = 'Registro';
+  else if (form === recuperarForm) titulo.textContent = 'Recuperar contraseña';
+};
 
   document.getElementById('registro-link').onclick = () => show(registroForm);
   document.getElementById('login-link').onclick = () => show(loginForm);
@@ -25,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) return msg.textContent = `❌ ${error.message}`;
 
-    window.location.href = 'products.html'; // Redirige si el login es exitoso
+    window.location.href = '/CraveSoftware_e-Commerce/products.html'; // Redirige si el login es exitoso
   });
 
   registroForm.addEventListener('submit', async (e) => {
@@ -44,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = recuperarForm['recuperar-email'].value;
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/docs/reset-password.html`,
+      redirectTo: `${window.location.origin}/CraveSoftware_e-Commerce/reset-password.html`,
     });
 
     if (error) return msg.textContent = `❌ ${error.message}`;
