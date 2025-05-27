@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const nombre = document.getElementById('nombre').value.trim();
     const direccion = document.getElementById('direccion').value.trim();
-    const metodoPago = document.getElementById('metodoPago').value;
+    const metodoPago = document.getElementById('metodopago').value;
 
     if (!nombre || !direccion || !metodoPago) {
       alert('Por favor completa todos los campos.');
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Insertar pedido
     const { data: pedido, error: pedidoError } = await supabase
-  .from('Pedido')
+  .from('pedido')
   .insert([{
     id_cliente: user.id,
     fecha: new Date().toISOString(),
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     const { error: detalleError } = await supabase
-      .from('DetallePedido')
+      .from('detallepedido')
       .insert(detalles);
 
     if (detalleError) {
