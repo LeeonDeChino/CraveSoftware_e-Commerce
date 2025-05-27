@@ -36,11 +36,16 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--color-primario);
+  color: #ccc;
+  text-decoration: underline;
 }
 
 main {
   padding: 2rem;
+}
+
+main > section {
+  margin-bottom: 2rem;
 }
 
 #buscador {
@@ -65,6 +70,11 @@ main {
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  transition: transform 0.2s;
+}
+
+.producto:hover {
+  transform: scale(1.02);
 }
 
 .producto-img {
@@ -74,6 +84,12 @@ main {
   border-radius: 8px;
   margin-bottom: 1rem;
   background-color: #f0f0f0;
+}
+
+@media (max-width: 500px) {
+  .producto-img {
+    height: 150px;
+  }
 }
 
 .producto h3 {
@@ -130,6 +146,11 @@ main {
   background: var(--color-boton-hover);
 }
 
+.auth button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 .auth p {
   text-align: center;
   margin: 0.5rem 0 0;
@@ -142,7 +163,7 @@ main {
 }
 
 .logo {
-  height: 100px; /* ajustable */
+  height: 100px;
   width: auto;
   border-radius: 8px;
 }
@@ -205,7 +226,19 @@ button:hover {
   background-color: var(--color-boton-hover);
 }
 
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 #confirm-section {
   text-align: center;
   margin-top: 2rem;
+}
+
+/* Accesibilidad */
+button:focus,
+a:focus {
+  outline: 2px solid var(--color-primario);
+  outline-offset: 2px;
 }

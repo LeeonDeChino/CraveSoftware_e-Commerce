@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   buscador.addEventListener('input', e => {
     const texto = e.target.value.toLowerCase();
     const filtrados = productos.filter(p =>
-      p.Nombre.toLowerCase().includes(texto) || p.Descripción.toLowerCase().includes(texto)
+      p.nombre.toLowerCase().includes(texto) || p.descripción.toLowerCase().includes(texto)
     );
     mostrarProductos(filtrados);
   });
