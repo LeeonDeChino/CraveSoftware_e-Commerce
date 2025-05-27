@@ -49,17 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Insertar pedido
     const { data: pedido, error: pedidoError } = await supabase
-      .from('Pedido')
-      .insert([{
-        cliente_id: user.id,
-        fecha: new Date().toISOString(),
-        estado: 'pendiente',
-        direccion_envio: direccion,
-        metodo_pago: metodoPago,
-        nombre_cliente: nombre
-      }])
-      .select()
-      .single();
+  .from('Pedido')
+  .insert([{
+    id_cliente: user.id,
+    fecha: new Date().toISOString(),
+    total: total,
+    estado: 'pendiente'
+  }])
+  .select()
+  .single();
 
     if (pedidoError) {
       console.error('Error al crear pedido:', pedidoError);
