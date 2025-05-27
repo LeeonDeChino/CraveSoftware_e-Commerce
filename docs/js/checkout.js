@@ -40,12 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const user = supabase.auth.user();
-    if (!user) {
-      alert('Debes iniciar sesión para hacer un pedido.');
-      window.location.href = '/CraveSoftware_e-Commerce/index.html';
-      return;
-    }
+    const { data: { user }, error } = await supabase.auth.getUser();
+
+  if (!user) {
+    alert('Debes iniciar sesión para completar tu compra.');
+    return;
+  }
 
     // Insertar pedido
     const { data: pedido, error: pedidoError } = await supabase
