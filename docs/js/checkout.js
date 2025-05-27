@@ -86,11 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Simulación de Stripe y envío de correo
-    console.log('🧾 Simulación de pago realizada con Stripe.');
-    console.log(`📧 Enviando correo de confirmación a: ${user.email}...`);
-    console.log('✅ Correo enviado con resumen del pedido.');
-
     localStorage.removeItem('cart');
-    window.location.href = '/CraveSoftware_e-Commerce/checkout-success.html';
+    window.location.href = '/CraveSoftware_e-Commerce/stripe-simulation.html';
   });
 });

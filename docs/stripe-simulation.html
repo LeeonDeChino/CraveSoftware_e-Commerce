@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stripe Simulado</title>
+  <link rel="stylesheet" href="/CraveSoftware_e-Commerce/css/styles.css" />
+  <link rel="icon" href="/CraveSoftware_e-Commerce/assets/LogoCrave.ico">
+</head>
+<body>
+  <main>
+    <h1>💳 Simulación de Stripe</h1>
+    <p>Procesando pago simulado con Stripe...</p>
+    <p>No cierres esta ventana.</p>
+
+    <script>
+      setTimeout(() => {
+        alert("✅ Pago simulado exitosamente.");
+        window.location.href = "/CraveSoftware_e-Commerce/checkout-success.html";
+      }, 3000); // Simula 3 segundos de procesamiento
+    </script>
+  </main>
+</body>
+</html>
