@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const nombre = document.getElementById('nombre').value.trim();
     const direccion = document.getElementById('direccion').value.trim();
-    const metodoPago = document.getElementById('metodopago').value;
+    const metodopago = document.getElementById('metodopago').value;
 
-    if (!nombre || !direccion || !metodoPago) {
+    if (!nombre || !direccion || !metodopago) {
       alert('Por favor completa todos los campos.');
       return;
     }
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     id_cliente: user.id,
     fecha: new Date().toISOString(),
     total: total,
-    estado: 'pendiente'
+    estado: 'Pendiente'
   }])
   .select()
   .single();
