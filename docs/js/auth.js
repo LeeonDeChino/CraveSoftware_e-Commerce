@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = '/CraveSoftware_e-Commerce/products.html'; // Redirige si el login es exitoso
     });
 
-  registroForm.addEventListener('submit', async (e) => {
+  /* registroForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = registroForm['registro-email'].value;
     const password = registroForm['registro-password'].value;
@@ -43,6 +43,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     msg.textContent = '✅ Registro exitoso. Revisa tu correo para confirmar la cuenta.';
   });
+  */
+  registroForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = registroForm['registro-email'].value;
+  const password = registroForm['registro-password'].value;
+
+  const { data, error: authError } = await supabase.auth.signUp({
+    email,
+    password
+  });
+
+  if (authError) {
+    msg.textContent = `❌ ${authError.message}`;
+    return;
+  }
+
+  const userId = data.user?.id;
+
+  if (!userId) {
+    msg.textContent = '❌ No se pudo obtener el ID del usuario';
+    return;
+  }
+
+  // Crear cliente en la tabla "cliente"
+  const { error: clienteError } = await supabase
+    .from('cliente')
+    .insert([{
+      id_cliente: userId,
+      correo: email,
+      nombre: '',
+      teléfono: '',
+      dirección: ''
+    }]);
+
+  if (clienteError) {
+    msg.textContent = `⚠️ Registro incompleto: ${clienteError.message}`;
+    return;
+  }
+
+  msg.textContent = '✅ Registro exitoso. Revisa tu correo para confirmar la cuenta.';
+});
 
   recuperarForm.addEventListener('submit', async (e) => {
     e.preventDefault();
