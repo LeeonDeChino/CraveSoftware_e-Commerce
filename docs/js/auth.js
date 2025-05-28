@@ -27,38 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = loginForm.email.value;
     const password = loginForm.password.value;
 
-    const { data: { user }, error } = await supabase.auth.signInWithPassword({ email, password });
-if (error) return msg.textContent = `❌ ${error.message}`;
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) return msg.textContent = `❌ ${error.message}`;
 
-// Verificar si el cliente ya existe
-const { data: clienteExistente, error: errorCliente } = await supabase
-  .from('cliente')
-  .select('id')
-  .eq('id', user.id)
-  .single();
-
-if (errorCliente && errorCliente.code !== 'PGRST116') {
-  console.error('Error al buscar cliente:', errorCliente);
-  msg.textContent = '❌ Error al validar cliente.';
-  return;
-}
-
-// Insertar si no existe
-if (!clienteExistente) {
-  const { error: insertError } = await supabase
-    .from('cliente')
-    .insert([{ id: user.id, correo: user.email }]);
-
-  if (insertError) {
-    console.error('Error al crear cliente:', insertError);
-    msg.textContent = '❌ Error al crear cliente.';
-    return;
-  }
-}
-
-// Redirige si todo fue exitoso
-window.location.href = '/CraveSoftware_e-Commerce/products.html';
-  });
+    window.location.href = '/CraveSoftware_e-Commerce/products.html'; // Redirige si el login es exitoso
+    });
 
   registroForm.addEventListener('submit', async (e) => {
     e.preventDefault();
