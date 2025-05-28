@@ -67,12 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Insertar detalles del pedido
     const detalles = cart.map(item => ({
-      id_pedido: pedido.id_pedido,
-      id_producto: item.id,
-      cantidad: item.quantity,
-      preciounitario: item.precio
+    id_pedido: pedido.id_pedido,
+    id_producto: item.id,
+    cantidad: item.quantity,
+    preciounitario: parseFloat(item.precio) || 0
     }));
-
+    
     const { error: detalleError } = await supabase
       .from('detallepedido')
       .insert(detalles);
