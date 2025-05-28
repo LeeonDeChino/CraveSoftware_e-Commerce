@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const historialSection = document.getElementById('historial');
 
-  const user = supabase.auth.user();
+  const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
     historialSection.innerHTML = '<p>Debes iniciar sesión para ver tu historial.</p>';
     return;
@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Obtener pedidos del usuario
   const { data: pedidos, error: pedidosError } = await supabase
-    .from('Pedido')
+    .from('pedido')
     .select('*')
-    .eq('cliente_id', user.id)
+    .eq('id_cliente', user.id)
     .order('fecha', { ascending: false });
 
   if (pedidosError || pedidos.length === 0) {
@@ -23,13 +23,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   historialSection.innerHTML = '';
   for (const pedido of pedidos) {
     const { data: detalles, error: detalleError } = await supabase
-      .from('DetallePedido')
-      .select('cantidad, precio_unitario, producto:producto_id(nombre)')
-      .eq('pedido_id', pedido.id);
+      .from('detallepedido')
+      .select('cantidad, preciounitario, producto:id_producto(nombre)')
+      .eq('id_pedido', pedido.id);
 
     if (detalleError) continue;
 
-    const total = detalles.reduce((sum, d) => sum + d.precio_unitario * d.cantidad, 0);
+    const total = detalles.reduce((sum, d) => sum + d.preciounitario * d.cantidad, 0);
     const fecha = new Date(pedido.fecha).toLocaleDateString();
 
     const pedidoDiv = document.createElement('div');
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <h3>Pedido #${pedido.id} - ${fecha}</h3>
       <ul>
         ${detalles.map(d => `
-          <li>${d.producto.nombre} × ${d.cantidad} - $${(d.precio_unitario * d.cantidad).toFixed(2)}</li>
+          <li>${d.producto.nombre} × ${d.cantidad} - $${(d.preciounitario * d.cantidad).toFixed(2)}</li>
         `).join('')}
       </ul>
       <p><strong>Total:</strong> $${total.toFixed(2)}</p>
