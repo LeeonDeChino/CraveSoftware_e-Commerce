@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const { data: detalles, error: detalleError } = await supabase
       .from('detallepedido')
       .select('cantidad, preciounitario, producto:id_producto(nombre)')
-      .eq('id_pedido', pedido.id);
+      .eq('id_pedido', pedido.id_pedido);
 
     if (detalleError) continue;
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const pedidoDiv = document.createElement('div');
     pedidoDiv.classList.add('pedido');
     pedidoDiv.innerHTML = `
-      <h3>Pedido #${pedido.id} - ${fecha}</h3>
+      <h3>Pedido #${pedido.id_pedido} - ${fecha}</h3>
       <ul>
         ${detalles.map(d => `
           <li>${d.producto.nombre} × ${d.cantidad} - $${(d.preciounitario * d.cantidad).toFixed(2)}</li>
